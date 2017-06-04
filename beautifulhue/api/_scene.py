@@ -32,10 +32,10 @@ class Scene:
         
         if service == 'scenes':
             scenes = []
-            for (k, v) in content.items():
+            for (k, v) in list(content.items()):
                 v['id'] = str(k)
                 scenes.append(v)
-            if resource.has_key('verbose') and resource['verbose']:
+            if 'verbose' in resource and resource['verbose']:
                 _scenes = []
                 for schedule in scenes:
                     path = 'api/{username}/scenes/{id}'.format(

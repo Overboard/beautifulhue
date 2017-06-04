@@ -37,10 +37,10 @@ class Schedule:
         status, content = request.get(url)
         if service == 'schedules':
             schedules = []
-            for (k, v) in content.items():
+            for (k, v) in list(content.items()):
                 v['id'] = int(k)
                 schedules.append(v)
-            if resource.has_key('verbose') and resource['verbose']:
+            if 'verbose' in resource and resource['verbose']:
                 _schedules = []
                 for schedule in schedules:
                     path = 'api/{username}/schedules/{id}'.format(

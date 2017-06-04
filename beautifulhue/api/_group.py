@@ -33,10 +33,10 @@ class Group:
         status, content = request.get(url, resource)
         if service == 'groups':
             groups = []
-            for (k, v) in content.items():
+            for (k, v) in list(content.items()):
                 v['id'] = int(k)
                 groups.append(v)
-            if resource.has_key('verbose') and resource['verbose']:
+            if 'verbose' in resource and resource['verbose']:
                 _groups = []
                 for group in groups:
                     path = 'api/{username}/groups/{id}'.format(
@@ -61,9 +61,9 @@ class Group:
         """
 
         request = Request()
-        if (resource['data'].has_key('name')):
+        if ('name' in resource['data']):
             service = 'groups/{id}'.format(id=resource['which'])
-        elif (resource['data'].has_key('action')):
+        elif ('action' in resource['data']):
             service = 'groups/{id}/action'.format(id=resource['which'])
         else:
             raise Exception('Unknown data type.')

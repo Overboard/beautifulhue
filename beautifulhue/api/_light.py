@@ -37,10 +37,10 @@ class Light:
         status, content = request.get(url, resource)
         if service == 'lights':
             lights = []
-            for (k, v) in content.items():
+            for (k, v) in list(content.items()):
                 v['id'] = int(k)
                 lights.append(v)
-            if resource.has_key('verbose') and resource['verbose']:
+            if 'verbose' in resource and resource['verbose']:
                 _lights = []
                 for light in lights:
                     path = 'api/{username}/lights/{id}'.format(
@@ -95,10 +95,10 @@ class Light:
         """
 
         request = Request()
-        if (resource['data'].has_key('attr')):
+        if ('attr' in resource['data']):
             service = 'lights/{id}'.format(id=resource['which'])
             data = resource['data']['attr']
-        elif (resource['data'].has_key('state')):
+        elif ('state' in resource['data']):
             service = 'lights/{id}/state'.format(id=resource['which'])
             data = resource['data']['state']
         else:

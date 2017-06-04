@@ -38,7 +38,7 @@ class Config:
 
         request = Request()
         url = 'http://{bridge_ip}/api'.format(bridge_ip=self.bridge['ip'])
-        if resource.has_key('user'):
+        if 'user' in resource:
             resource['user']['username'] = resource['user'].pop('name')
             status, content = request.post(url, resource['user'])
         if debug:
@@ -69,7 +69,7 @@ class Config:
         """
 
         request = Request()
-        if resource.has_key('user'):
+        if 'user' in resource:
             service = 'config/whitelist/{id}'.format(id=resource['user']['name'])
         path = 'api/{username}/{service}'.format(
                                                username=self.user['name'],
